@@ -10,12 +10,13 @@ class Topic(models.Model):
         return self.name
 
 class Room(models.Model):
-    # host = 
-    # topic = 
+    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True) 
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)   
     # khác với Charfield là trong admin panel, text area sẽ to hơn
-    # null là null trong db, blank là cho phép rỗng khi create, add bằng python...
+    # null là null trong db, 
+    # blank là cho phép rỗng khi create, add bằng python, lúc này có thể set default...
     # participants = models
     updated_at = models.DateTimeField(auto_now=True)  # take a snapshot EVERY TIME we update a row
     created_at = models.DateTimeField(auto_now_add=True) # take a snapshot ONLY THE FIRST TIME we create a row
